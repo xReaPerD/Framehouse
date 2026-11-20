@@ -1,0 +1,210 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: var(--ground);
+      font-family: "Outfit", sans-serif;
+      color: var(--ink);
+    }
+    #root .abs { position: absolute; left: 0; top: 0; }
+
+    /* hero object: the point of light */
+    #lm-spark { width: 22px; height: 22px; border-radius: 50%; background: #FFF3DD;
+      box-shadow: 0 0 18px 6px rgba(255, 179, 71, .85), 0 0 60px 20px rgba(255, 154, 46, .35); }
+    #lm-bloom { width: 900px; height: 900px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,227,176,.95) 0%, rgba(255,179,71,.75) 6%, rgba(255,154,46,.18) 26%, rgba(255,154,46,.05) 45%, rgba(255,154,46,0) 60%); }
+    .lm-mote { width: 5px; height: 5px; border-radius: 50%; background: #FFD9A0; }
+
+    /* beat 2: the line of light */
+    #lm-beam { left: 420px; top: 630px; width: 1080px; height: 60px; }
+    #lm-beam svg { overflow: visible; display: block; }
+    #lm-beam-glow { left: 420px; top: 640px; width: 1080px; height: 40px;
+      background: linear-gradient(90deg, rgba(255,179,71,0), rgba(255,179,71,.35), rgba(255,179,71,0));
+      filter: blur(18px); }
+
+    .lm-line { left: 0; width: 1920px; text-align: center; font-weight: 500; font-size: 96px;
+      letter-spacing: -0.03em; line-height: 1; white-space: nowrap; }
+    .lm-line span { display: inline-block; }
+    .lm-line .amber { color: var(--amber); }
+    #lm-line1 { top: 450px; }
+    #lm-line2 { top: 118px; font-size: 88px; }
+
+    /* beat 3–4: the lamp, only suggested */
+    #lm-desk { left: 0; top: 879px; width: 1920px; height: 2px; background: #2A2622; }
+    #lm-arm { width: 1920px; height: 1080px; }
+    #lm-head { left: 1070px; top: 300px; width: 110px; height: 22px; border-radius: 11px;
+      background: #1E1A16; border: 2px solid rgba(243,238,230,.5); }
+    #lm-cone { left: 830px; top: 318px; width: 590px; height: 562px;
+      clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%);
+      background: linear-gradient(180deg, rgba(255,197,110,.55), rgba(255,179,71,.04)); }
+    #lm-pool { left: 825px; top: 846px; width: 600px; height: 68px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,217,160,.9) 0%, rgba(255,179,71,.35) 60%, rgba(255,179,71,0) 100%); }
+    #lm-ring { width: 1920px; height: 1080px; }
+
+    /* beat 6: end card */
+    #lm-word { left: 0; top: 470px; width: 1190px; text-align: right; font-weight: 500;
+      font-size: 200px; line-height: 1; letter-spacing: -0.045em; white-space: nowrap; }
+    #lm-word span { display: inline-block; }
+    #lm-halo { width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,179,71,.6), rgba(255,179,71,0) 70%); }
+    #lm-soon { left: 0; top: 678px; width: 1920px; text-align: center; font-weight: 300;
+      font-size: 40px; letter-spacing: .2em; text-indent: .2em; color: #8C8378; }
+  </style>
+
+  <div id="root" data-composition-id="lumen" data-width="1920" data-height="1080">
+    <div id="lm-bloom" class="abs" data-layout-ignore></div>
+    <div id="lm-motes" class="abs" data-layout-ignore>
+      <div class="lm-mote abs" style="left:812px;top:470px"></div>
+      <div class="lm-mote abs" style="left:1104px;top:602px"></div>
+      <div class="lm-mote abs" style="left:1046px;top:430px"></div>
+      <div class="lm-mote abs" style="left:880px;top:640px"></div>
+      <div class="lm-mote abs" style="left:1180px;top:500px"></div>
+      <div class="lm-mote abs" style="left:742px;top:560px"></div>
+    </div>
+
+    <div id="lm-beam-glow" class="abs" data-layout-ignore></div>
+    <div id="lm-beam" class="abs" data-layout-ignore>
+      <svg width="1080" height="60" viewBox="0 0 1080 60">
+        <defs>
+          <linearGradient id="lm-beam-grad" x1="0" x2="1080" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#FFB347" stop-opacity="0" />
+            <stop offset=".5" stop-color="#FFD08A" stop-opacity="1" />
+            <stop offset="1" stop-color="#FFB347" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <path id="lm-wave" d="M0 30 H400 C430 30 440 30 470 30 S510 30 540 30 S580 30 610 30 S650 30 680 30 H1080"
+          stroke="url(#lm-beam-grad)" stroke-width="4" fill="none" />
+      </svg>
+    </div>
+
+    <div id="lm-line1" class="lm-line abs">
+      <span>Light</span> <span>that</span> <span class="amber">listens.</span>
+    </div>
+
+    <div id="lm-desk" class="abs" data-layout-ignore></div>
+    <div id="lm-cone" class="abs" data-layout-ignore></div>
+    <div id="lm-pool" class="abs" data-layout-ignore></div>
+    <svg id="lm-arm" class="abs" viewBox="0 0 1920 1080" data-layout-ignore>
+      <path id="lm-arm-path" d="M520 1100 C560 760 700 400 960 300 C1020 278 1060 290 1090 305"
+        pathLength="1" stroke="#F3EEE6" stroke-opacity=".55" stroke-width="5" fill="none"
+        stroke-linecap="round" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" />
+    </svg>
+    <div id="lm-head" class="abs" data-layout-ignore></div>
+    <svg id="lm-ring" class="abs" viewBox="0 0 1920 1080" data-layout-ignore>
+      <ellipse cx="1125" cy="880" rx="200" ry="40" fill="none" stroke="#2A2622" stroke-width="3" />
+      <ellipse id="lm-ring-fill" cx="1125" cy="880" rx="200" ry="40" fill="none" stroke="#FFB347"
+        stroke-width="3" pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100"
+        />
+    </svg>
+
+    <div id="lm-line2" class="lm-line abs">
+      <span class="amber">Focus,</span> <span>on</span> <span>demand.</span>
+    </div>
+
+    <div id="lm-word" class="abs">
+      <span>L</span><span>u</span><span>m</span><span>e</span><span>n</span>
+    </div>
+    <div id="lm-halo" class="abs" data-layout-ignore></div>
+    <div id="lm-spark" class="abs" data-layout-ignore></div>
+    <div id="lm-soon" class="abs">COMING SOON</div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const W1 = "#lm-line1 span", W2 = "#lm-line2 span", L = "#lm-word span";
+      const flat = "M0 30 H400 C430 30 440 30 470 30 S510 30 540 30 S580 30 610 30 S650 30 680 30 H1080";
+      const wave = "M0 30 H400 C430 30 440 6 470 6 S510 54 540 54 S580 8 610 8 S650 46 680 30 H1080";
+      const wave2 = "M0 30 H400 C430 30 440 18 470 18 S510 42 540 42 S580 20 610 20 S650 38 680 30 H1080";
+      const DOT = { x: 1226, y: 574 }; // the wordmark's full stop
+
+      // initial states (all set at t=0 so any frame renders on its own)
+      gsap.set("#lm-spark", { x: 960 - 11, y: 540 - 11, opacity: 0, scale: 0.4 });
+      gsap.set("#lm-bloom", { x: 960 - 450, y: 540 - 450, opacity: 0, scale: 0.08 });
+      gsap.set("#lm-motes", { opacity: 0, y: 0 });
+      gsap.set(["#lm-beam", "#lm-beam-glow"], { scaleX: 0, opacity: 0, transformOrigin: "50% 50%" });
+      gsap.set("#lm-wave", { attr: { d: flat } });
+      gsap.set([W1, W2], { opacity: 0, filter: "blur(10px)" });
+      gsap.set("#lm-desk", { scaleX: 0, opacity: 1, transformOrigin: "50% 50%" });
+      gsap.set("#lm-arm-path", { attr: { "stroke-dashoffset": 1.1 }, opacity: 1 });
+      gsap.set("#lm-arm", { opacity: 1 });
+      gsap.set("#lm-head", { opacity: 0 });
+      gsap.set("#lm-cone", { scaleY: 0, scaleX: 1, opacity: 1, transformOrigin: "50% 0%" });
+      gsap.set("#lm-pool", { opacity: 0, scaleX: 1, scaleY: 1, transformOrigin: "50% 50%" });
+      gsap.set("#lm-ring", { opacity: 0 });
+      gsap.set("#lm-ring-fill", { attr: { "stroke-dashoffset": 100 } });
+      gsap.set(L, { opacity: 0, filter: "blur(14px)" });
+      gsap.set(L, { x: (i) => (i - 4) * 16 });
+      gsap.set("#lm-halo", { x: DOT.x - 100, y: DOT.y - 100, opacity: 0, scale: 0.6 });
+      gsap.set("#lm-soon", { opacity: 0, filter: "blur(8px)", scale: 1.04, transformOrigin: "50% 50%" });
+
+      // 1 · Spark 0.0–2.0
+      tl.to("#lm-spark", { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 0.4);
+      tl.to("#lm-bloom", { opacity: 1, scale: 0.5, duration: 0.9, ease: "expo.out" }, 0.7);
+      tl.to("#lm-motes", { opacity: 0.6, duration: 0.8, ease: "sine.out" }, 0.9);
+      tl.to("#lm-motes", { y: -26, duration: 1.6, ease: "none" }, 0.4);
+      // hand-off: halo exhales sideways into the line
+      tl.to("#lm-bloom", { scaleY: 0.06, scaleX: 1.1, opacity: 0, duration: 0.6, ease: "power3.in" }, 1.6);
+      tl.to("#lm-motes", { opacity: 0, duration: 0.4 }, 1.7);
+      tl.to("#lm-spark", { y: 660 - 11, duration: 0.45, ease: "power3.inOut" }, 1.6);
+      tl.to(["#lm-beam", "#lm-beam-glow"], { scaleX: 1, opacity: 1, duration: 0.9, ease: "expo.out" }, 2.0);
+      tl.to("#lm-spark", { opacity: 0, scale: 0.5, duration: 0.25, ease: "power2.in" }, 2.02);
+
+      // 2 · Listens 2.0–5.0
+      tl.to(W1, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out", stagger: 0.12 }, 2.35);
+      tl.to("#lm-wave", { attr: { d: wave }, duration: 0.3, ease: "power2.out" }, 2.75);
+      tl.to("#lm-wave", { attr: { d: wave2 }, duration: 0.35, ease: "sine.inOut" }, 3.05);
+      tl.to("#lm-wave", { attr: { d: wave }, duration: 0.35, ease: "sine.inOut" }, 3.4);
+      tl.to("#lm-wave", { attr: { d: flat }, duration: 0.7, ease: "sine.inOut" }, 3.75);
+      tl.to(W1, { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.07 }, 4.5);
+      // line pulls back into the point, which rises to the lamp head
+      tl.to(["#lm-beam", "#lm-beam-glow"], { scaleX: 0.012, duration: 0.45, ease: "power3.in" }, 4.6);
+      tl.set("#lm-spark", { x: 960 - 11, y: 660 - 11 }, 4.9);
+      tl.to("#lm-spark", { opacity: 1, scale: 1, duration: 0.15 }, 4.95);
+      tl.to(["#lm-beam", "#lm-beam-glow"], { opacity: 0, duration: 0.12 }, 5.0);
+
+      // 3 · Glimpse 5.0–8.0
+      tl.to("#lm-spark", { x: 1125 - 11, duration: 1.3, ease: "power2.inOut" }, 5.1);
+      tl.to("#lm-spark", { y: 322 - 11, duration: 1.3, ease: "power3.inOut" }, 5.1);
+      tl.to("#lm-arm-path", { attr: { "stroke-dashoffset": 0 }, duration: 1.4, ease: "power2.inOut" }, 5.05);
+      tl.to("#lm-desk", { scaleX: 1, duration: 1.2, ease: "power2.out" }, 5.6);
+      tl.to("#lm-head", { opacity: 1, duration: 0.3 }, 6.25);
+      tl.to("#lm-spark", { scale: 1.3, duration: 0.3, ease: "power2.out" }, 6.4);
+      tl.to("#lm-cone", { scaleY: 1, duration: 0.9, ease: "expo.out" }, 6.45);
+      tl.to("#lm-pool", { opacity: 0.6, duration: 0.8, ease: "power2.out" }, 6.8);
+
+      // 4 · Focus 8.0–11.0
+      tl.to("#lm-cone", { scaleX: 0.42, duration: 1.0, ease: "power3.inOut" }, 8.0);
+      tl.to("#lm-pool", { scaleX: 0.5, scaleY: 0.66, opacity: 1, duration: 1.0, ease: "power3.inOut" }, 8.0);
+      tl.to(["#lm-arm", "#lm-head"], { opacity: 0.45, duration: 0.8 }, 8.1);
+      tl.to(W2, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out", stagger: 0.12 }, 8.35);
+      tl.to("#lm-ring", { opacity: 1, duration: 0.3 }, 8.7);
+      tl.to("#lm-ring-fill", { attr: { "stroke-dashoffset": 0 }, duration: 1.5, ease: "power2.inOut" }, 8.8);
+      tl.to(W2, { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.07 }, 10.45);
+      // everything collapses back into the single point, on the desk
+      tl.to(["#lm-arm", "#lm-head", "#lm-ring", "#lm-desk"], { opacity: 0, duration: 0.45, ease: "power2.in" }, 10.6);
+      tl.to("#lm-cone", { scaleY: 0, opacity: 0, duration: 0.45, ease: "power3.in" }, 10.6);
+      tl.to("#lm-spark", { opacity: 0, duration: 0.3 }, 10.6);
+      tl.to("#lm-pool", { scaleX: 0.03, scaleY: 0.3, duration: 0.45, ease: "power3.in" }, 10.6);
+      tl.set("#lm-spark", { x: 1125 - 11, y: 880 - 11, scale: 0.6 }, 10.95);
+      tl.to("#lm-spark", { opacity: 1, scale: 1, duration: 0.15 }, 10.98);
+      tl.to("#lm-pool", { opacity: 0, duration: 0.12 }, 11.02);
+
+      // 5 · Breath 11.0–11.8
+      tl.to("#lm-spark", { x: 960 - 11, y: 574 - 11, duration: 0.8, ease: "sine.inOut" }, 11.0);
+
+      // 6 · End card 11.8–15.0
+      tl.to("#lm-spark", { x: DOT.x - 11, duration: 0.45, ease: "expo.out" }, 11.8);
+      tl.to(L, { opacity: 1, filter: "blur(0px)", duration: 0.35, ease: "power2.out", stagger: 0.06 }, 11.82);
+      tl.to(L, { x: 0, duration: 0.9, ease: "expo.out" }, 11.82);
+      tl.to("#lm-spark", { scale: 1.45, duration: 0.25, ease: "power2.out" }, 12.2);
+      tl.to("#lm-halo", { opacity: 0.8, scale: 1, duration: 0.25, ease: "power2.out" }, 12.22);
+      tl.to("#lm-halo", { opacity: 0.25, scale: 1.4, duration: 0.9, ease: "power2.out" }, 12.47);
+      tl.to("#lm-soon", { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.6, ease: "expo.out" }, 12.6);
+
+      window.__timelines["lumen"] = tl;
+    })();
+  </script>
+</template>

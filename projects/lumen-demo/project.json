@@ -1,0 +1,21 @@
+{
+  "slug": "lumen-demo",
+  "title": "Lumen Demo",
+  "client": null,
+  "brand": "project",
+  "createdAt": "2026-11-20T16:25:00.692Z",
+  "hyperframesVersion": "0.9.41",
+  "status": "rendered",
+  "cuts": [
+    {
+      "id": "teaser",
+      "resolution": "landscape",
+      "width": 1920,
+      "height": 1080,
+      "duration": 15,
+      "fps": 30,
+      "dir": "cuts/teaser",
+      "createdAt": "2026-11-20T16:25:05.653Z"
+    }
+  ]
+}

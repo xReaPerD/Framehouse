@@ -1,0 +1,37 @@
+{
+  "$comment": "This project's brand kit. Proposed by the agent from the brief's tone words (no client material). See references/brand-kit.md.",
+  "status": "ready",
+  "sources": ["requester direction: fruity colours, glassmorphism"],
+  "name": "Framehouse",
+  "tagline": "Your AI video studio",
+  "url": "",
+  "colors": {
+    "ground": "#160E2E",
+    "ink": "#FFFFFF",
+    "primary": "#FFB224",
+    "accent": "#FF4D7D",
+    "muted": "#CFC8E6",
+    "fruit": { "mango": "#FFB224", "strawberry": "#FF4D7D", "lime": "#9BE15D", "blueberry": "#5B7CFF" },
+    "glass": { "fill": "rgba(255,255,255,0.12)", "tint": "rgba(22,14,46,0.30)", "border": "rgba(255,255,255,0.40)", "blurPx": 28 }
+  },
+  "fonts": {
+    "display": { "family": "Poppins", "weight": 600, "source": "bundled" },
+    "body": { "family": "JetBrains Mono", "weight": 400, "source": "bundled" }
+  },
+  "logo": {
+    "primary": "",
+    "mark": "",
+    "onDark": "",
+    "minHeightPx": 48,
+    "clearSpace": "height of the mark",
+    "$note": "No logo supplied: mark = a rounded 16:9 glass tile with the four fruit colours blurred inside; wordmark = 'Framehouse' in Poppins 600."
+  },
+  "voice": { "tone": ["confident", "plain", "playful"], "avoid": ["exclamation marks", "AI hype words", "superlatives"] },
+  "motion": {
+    "feel": "soft and buoyant: blobs drift slowly, glass panels slide and morph, type lands crisp",
+    "defaultEase": "expo.out (arrivals), power3.inOut (morphs), power3.in (exits)",
+    "cutRhythm": "no cuts; one canvas, a new beat every ~2.5-3 s"
+  },
+  "endCard": { "lines": ["Framehouse", "Your AI video studio"], "holdSeconds": 2.5 },
+  "legal": []
+}

@@ -1,0 +1,285 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: var(--ground);
+      font-family: "Poppins", sans-serif;
+      color: #fff;
+    }
+    #root .abs { position: absolute; left: 0; top: 0; }
+
+    /* fruit blobs (soft edges come from the gradient itself) */
+    .fh-blob { width: 760px; height: 760px; border-radius: 50%; }
+    #fh-b1 { background: radial-gradient(circle, rgba(255,178,36,.95) 0%, rgba(255,178,36,.55) 32%, rgba(255,178,36,0) 68%); }
+    #fh-b2 { background: radial-gradient(circle, rgba(255,77,125,.95) 0%, rgba(255,77,125,.55) 32%, rgba(255,77,125,0) 68%); }
+    #fh-b3 { background: radial-gradient(circle, rgba(155,225,93,.9) 0%, rgba(155,225,93,.5) 32%, rgba(155,225,93,0) 68%); }
+    #fh-b4 { background: radial-gradient(circle, rgba(91,124,255,.95) 0%, rgba(91,124,255,.55) 32%, rgba(91,124,255,0) 68%); }
+
+    /* frosted glass */
+    .fh-glass {
+      background: linear-gradient(rgba(255,255,255,.13), rgba(255,255,255,.08)), rgba(22,14,46,.28);
+      backdrop-filter: blur(30px) saturate(150%);
+      -webkit-backdrop-filter: blur(30px) saturate(150%);
+      border: 2px solid rgba(255,255,255,.42);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 30px 80px rgba(10,5,30,.35);
+    }
+
+    #fh-panel { left: 480px; top: 270px; width: 960px; height: 540px; border-radius: 28px; }
+    .fh-grid { background: rgba(255,255,255,.5); }
+    #fh-gv1 { left: 800px; top: 270px; width: 2px; height: 540px; }
+    #fh-gv2 { left: 1120px; top: 270px; width: 2px; height: 540px; }
+    #fh-gh { left: 480px; top: 450px; width: 960px; height: 2px; }
+
+    /* beat 2: the prompt */
+    .fh-mono { font-family: "JetBrains Mono", monospace; }
+    #fh-label { left: 560px; top: 344px; font-size: 28px; letter-spacing: 3px; color: rgba(255,255,255,.92); }
+    #root .fh-type { left: 560px; font-size: 40px; line-height: 1; white-space: pre; color: #fff; }
+    #fh-t1 { top: 436px; }
+    #fh-t2 { top: 500px; }
+    #fh-cursor { left: 560px; top: 432px; width: 4px; height: 46px; background: #fff; }
+
+    .fh-line { left: 0; width: 1920px; text-align: center; font-weight: 600; font-size: 88px;
+      letter-spacing: -0.025em; line-height: 1; white-space: nowrap; }
+    .fh-line span { display: inline-block; }
+    #fh-l1 { top: 880px; } #fh-l2 { top: 810px; } #fh-l3 { top: 800px; }
+    .mango { color: #FFB224; } .lime { color: #9BE15D; } .berry { color: #FF4D7D; }
+
+    /* beat 3: tiles */
+    .fh-tile { width: 290px; height: 164px; border-radius: 18px; }
+    .fh-key { position: absolute; inset: 0; }
+    .k-dot { position: absolute; left: 123px; top: 60px; width: 44px; height: 44px; border-radius: 50%;
+      background: radial-gradient(circle, #fff 0 18%, #FFB224 30%, rgba(255,178,36,0) 70%); }
+    .k-bar { position: absolute; border-radius: 8px; }
+    .k-aa { position: absolute; left: 0; width: 290px; top: 50px; text-align: center; font-weight: 600; font-size: 50px; line-height: 1; }
+    #fh-chip { left: 1196px; top: 636px; width: 244px; height: 58px; border-radius: 29px; background: #9BE15D;
+      color: #160E2E; font-size: 28px; display: flex; align-items: center; gap: 12px; padding-left: 22px; }
+    #fh-chip svg { display: block; }
+
+    /* beat 4: timeline + render */
+    #fh-track { left: 440px; top: 300px; width: 1040px; height: 220px; border-radius: 26px; }
+    #root .fh-tick { top: 334px; width: 2px; height: 14px; background: rgba(255,255,255,.55); }
+    #fh-playhead { left: 479px; top: 318px; width: 3px; height: 180px; background: #fff; }
+    #fh-playhead::before { content: ""; position: absolute; left: -7px; top: -8px; width: 17px; height: 17px; border-radius: 50%; background: #fff; }
+    #fh-bar { left: 480px; top: 572px; width: 960px; height: 22px; border-radius: 11px; }
+    #fh-fill { left: 482px; top: 574px; width: 956px; height: 18px; border-radius: 9px; background: #FF4D7D; }
+    #fh-file { left: 480px; top: 616px; font-size: 28px; color: rgba(255,255,255,.82); }
+    #fh-pct { left: 1240px; width: 200px; top: 616px; text-align: right; font-size: 28px; color: #fff; }
+
+    /* beat 5: play */
+    #fh-play { left: 896px; top: 476px; width: 128px; height: 128px; border-radius: 50%;
+      background: rgba(255,255,255,.22); border: 3px solid #fff; }
+    #fh-play svg { position: absolute; left: 44px; top: 32px; }
+
+    /* beat 6: end card */
+    #fh-mark { left: 500px; top: 472px; width: 160px; height: 90px; border-radius: 18px; overflow: hidden;
+      background: #2A1F4A; border: 3px solid rgba(255,255,255,.75); }
+    .fh-mb { position: absolute; width: 110px; height: 110px; border-radius: 50%; }
+    #fh-word { left: 700px; top: 452px; font-weight: 600; font-size: 124px; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
+    #fh-word span { display: inline-block; }
+    #fh-tag { left: 0; width: 1920px; top: 630px; text-align: center; font-weight: 300; font-size: 40px; color: #CFC8E6; }
+  </style>
+
+  <div id="root" data-composition-id="fh" data-width="1920" data-height="1080">
+    <div id="fh-blobs" class="abs" data-layout-ignore>
+      <div id="fh-b1" class="fh-blob abs"></div>
+      <div id="fh-b2" class="fh-blob abs"></div>
+      <div id="fh-b3" class="fh-blob abs"></div>
+      <div id="fh-b4" class="fh-blob abs"></div>
+    </div>
+
+    <div id="fh-panel" class="fh-glass abs" data-layout-ignore></div>
+    <div id="fh-gv1" class="fh-grid abs" data-layout-ignore></div>
+    <div id="fh-gv2" class="fh-grid abs" data-layout-ignore></div>
+    <div id="fh-gh" class="fh-grid abs" data-layout-ignore></div>
+
+    <div id="fh-label" class="fh-mono abs">PROMPT</div>
+    <div id="fh-t1" class="fh-type fh-mono abs">A 15-second launch teaser.</div>
+    <div id="fh-t2" class="fh-type fh-mono abs">Bright, fruity, glassy.</div>
+    <div id="fh-cursor" class="abs" data-layout-ignore></div>
+
+    <div id="fh-l1" class="fh-line abs"><span class="mango">Describe</span> <span>it.</span></div>
+
+    <div id="fh-track" class="fh-glass abs" data-layout-ignore></div>
+    <div class="fh-tick abs" style="left:480px" data-layout-ignore></div>
+    <div class="fh-tick abs" style="left:640px" data-layout-ignore></div>
+    <div class="fh-tick abs" style="left:800px" data-layout-ignore></div>
+    <div class="fh-tick abs" style="left:960px" data-layout-ignore></div>
+    <div class="fh-tick abs" style="left:1120px" data-layout-ignore></div>
+    <div class="fh-tick abs" style="left:1280px" data-layout-ignore></div>
+    <div class="fh-tick abs" style="left:1440px" data-layout-ignore></div>
+
+    <div id="fh-tile0" class="fh-tile fh-glass abs" style="left:480px;top:250px" data-layout-ignore>
+      <div class="fh-key"><div class="k-dot"></div></div>
+    </div>
+    <div id="fh-tile1" class="fh-tile fh-glass abs" style="left:815px;top:250px" data-layout-ignore>
+      <div class="fh-key">
+        <div class="k-bar" style="left:75px;top:60px;width:140px;height:14px;background:#fff"></div>
+        <div class="k-bar" style="left:100px;top:90px;width:90px;height:10px;background:#FF4D7D"></div>
+      </div>
+    </div>
+    <div id="fh-tile2" class="fh-tile fh-glass abs" style="left:1150px;top:250px" data-layout-ignore>
+      <div class="fh-key">
+        <svg width="290" height="164" viewBox="0 0 290 164"><path d="M50 164 C80 96 130 56 196 50" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="200" cy="50" r="9" fill="#9BE15D"/></svg>
+      </div>
+    </div>
+    <div id="fh-tile3" class="fh-tile fh-glass abs" style="left:480px;top:444px" data-layout-ignore>
+      <div class="fh-key"><div class="k-aa">Aa</div></div>
+    </div>
+    <div id="fh-tile4" class="fh-tile fh-glass abs" style="left:815px;top:444px" data-layout-ignore>
+      <div class="fh-key">
+        <div class="k-bar" style="left:58px;top:50px;width:64px;height:64px;border-radius:16px;background:#5B7CFF"></div>
+        <div class="k-bar" style="left:134px;top:50px;width:98px;height:64px;border-radius:16px;background:rgba(255,255,255,.85)"></div>
+      </div>
+    </div>
+    <div id="fh-tile5" class="fh-tile fh-glass abs" style="left:1150px;top:444px" data-layout-ignore>
+      <div class="fh-key">
+        <div class="k-bar" style="left:88px;top:62px;width:44px;height:26px;border-radius:7px;background:rgba(255,255,255,.9)"></div>
+        <div class="k-bar" style="left:142px;top:68px;width:64px;height:14px;background:#fff"></div>
+      </div>
+    </div>
+
+    <div id="fh-chip" class="fh-mono abs">
+      <svg width="34" height="28" viewBox="0 0 34 28"><path id="fh-check" d="M4 14 l9 9 l17 -19" stroke="#160E2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1"/></svg>
+      <span>Approved</span>
+    </div>
+    <div id="fh-l2" class="fh-line abs"><span class="lime">Approve</span> <span>it.</span></div>
+
+    <div id="fh-playhead" class="abs" data-layout-ignore></div>
+    <div id="fh-bar" class="fh-glass abs" data-layout-ignore></div>
+    <div id="fh-fill" class="abs" data-layout-ignore></div>
+    <div id="fh-file" class="fh-mono abs">rendering teaser_v001.mp4</div>
+    <div id="fh-pct" class="fh-mono abs">0%</div>
+    <div id="fh-l3" class="fh-line abs"><span class="berry">Render</span> <span>it.</span></div>
+
+    <div id="fh-play" class="abs" data-layout-ignore>
+      <svg width="48" height="58" viewBox="0 0 48 58"><path d="M2 2 L46 29 L2 56 Z" fill="#fff"/></svg>
+    </div>
+
+    <div id="fh-mark" class="abs" data-layout-ignore>
+      <div class="fh-mb" style="left:-35px;top:-45px;background:radial-gradient(circle,#FFB224 20%,rgba(255,178,36,0) 70%)"></div>
+      <div class="fh-mb" style="left:85px;top:-50px;background:radial-gradient(circle,#FF4D7D 20%,rgba(255,77,125,0) 70%)"></div>
+      <div class="fh-mb" style="left:-35px;top:30px;background:radial-gradient(circle,#9BE15D 20%,rgba(155,225,93,0) 70%)"></div>
+      <div class="fh-mb" style="left:85px;top:25px;background:radial-gradient(circle,#5B7CFF 20%,rgba(91,124,255,0) 70%)"></div>
+      <div class="abs" style="width:160px;height:90px;background:rgba(255,255,255,.14)"></div>
+    </div>
+    <div id="fh-word" class="abs">
+      <span>F</span><span>r</span><span>a</span><span>m</span><span>e</span><span>h</span><span>o</span><span>u</span><span>s</span><span>e</span>
+    </div>
+    <div id="fh-tag" class="abs">Your AI video studio</div>
+  </div>
+
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const B = ["#fh-b1", "#fh-b2", "#fh-b3", "#fh-b4"];
+      const centers = [[560, 300], [1400, 270], [600, 860], [1380, 830]];
+      const drift = [[70, 40], [-60, 50], [60, -45], [-70, -35]];
+      const TILES = [0, 1, 2, 3, 4, 5].map((i) => "#fh-tile" + i);
+      const finalL = [480, 815, 1150], finalT = [250, 444];
+      const W1 = "#fh-l1 span", W2 = "#fh-l2 span", W3 = "#fh-l3 span", WM = "#fh-word span";
+      const GRID = ["#fh-gv1", "#fh-gv2", "#fh-gh"];
+      const MARK = { x: 500, y: 472, s: 160 / 960 };
+
+      // ---------- initial states (immediate, so frame 0 is right) ----------
+      B.forEach((b, i) => gsap.set(b, { x: centers[i][0] - 380, y: centers[i][1] - 380, scale: 0.6, opacity: 0.55, transformOrigin: "50% 50%" }));
+      gsap.set("#fh-panel", { opacity: 0, scale: 0.94, transformOrigin: "50% 50%" });
+      gsap.set(GRID, { opacity: 0 });
+      gsap.set(["#fh-gv1", "#fh-gv2"], { scaleY: 0, transformOrigin: "50% 50%" });
+      gsap.set("#fh-gh", { scaleX: 0, transformOrigin: "50% 50%" });
+      gsap.set(["#fh-label", "#fh-cursor"], { opacity: 0 });
+      gsap.set(["#fh-t1", "#fh-t2"], { clipPath: "inset(0 100% 0 0)" });
+      gsap.set([W1, W2, W3], { opacity: 0, filter: "blur(10px)" });
+      TILES.forEach((t, i) => {
+        const c = i % 3, r = Math.floor(i / 3);
+        gsap.set(t, { transformOrigin: "0 0", x: 480 + 320 * c - finalL[c], y: 270 + 180 * r - finalT[r], scale: 320 / 290, opacity: 0 });
+      });
+      gsap.set(".fh-key", { opacity: 0, scale: 0.85, transformOrigin: "50% 50%" });
+      gsap.set("#fh-chip", { opacity: 0, scale: 0.7, transformOrigin: "50% 50%" });
+      gsap.set("#fh-check", { attr: { "stroke-dashoffset": 1.1 } });
+      gsap.set("#fh-track", { opacity: 0, scaleX: 0.92, transformOrigin: "50% 50%" });
+      gsap.set(".fh-tick", { opacity: 0 });
+      gsap.set("#fh-playhead", { opacity: 0, x: 0 });
+      gsap.set(["#fh-bar", "#fh-file", "#fh-pct"], { opacity: 0 });
+      gsap.set("#fh-fill", { scaleX: 0, opacity: 0, transformOrigin: "0% 50%" });
+      gsap.set("#fh-play", { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" });
+      gsap.set("#fh-mark", { opacity: 0 });
+      gsap.set(WM, { opacity: 0, filter: "blur(12px)", y: 10 });
+      gsap.set("#fh-tag", { opacity: 0, filter: "blur(8px)" });
+
+      // ---------- background drift (whole film, settles by 13 s) ----------
+      B.forEach((b, i) => {
+        tl.to(b, { opacity: 0.85, scale: 1, duration: 1.1, ease: "expo.out" }, 0.3 + i * 0.12);
+        tl.to(b, { x: "+=" + drift[i][0], y: "+=" + drift[i][1], duration: 13, ease: "sine.inOut" }, 0);
+      });
+
+      // ---------- 1 · glass forms 0–2 ----------
+      tl.to("#fh-panel", { opacity: 1, scale: 1, duration: 0.9, ease: "expo.out" }, 0.9);
+
+      // ---------- 2 · describe 2.0–4.8 ----------
+      tl.to(["#fh-label", "#fh-cursor"], { opacity: 1, duration: 0.2 }, 1.85);
+      tl.to("#fh-t1", { clipPath: "inset(0 0% 0 0)", duration: 0.8, ease: "steps(26)" }, 2.1);
+      tl.to("#fh-cursor", { x: 26 * 24 + 4, duration: 0.8, ease: "steps(26)" }, 2.1);
+      tl.set("#fh-cursor", { x: 0, y: 64 }, 2.98);
+      tl.to("#fh-t2", { clipPath: "inset(0 0% 0 0)", duration: 0.7, ease: "steps(23)" }, 3.0);
+      tl.to("#fh-cursor", { x: 23 * 24 + 4, duration: 0.7, ease: "steps(23)" }, 3.0);
+      tl.to("#fh-cursor", { opacity: 0, duration: 0.01, repeat: 4, yoyo: true, repeatDelay: 0.14 }, 3.8);
+      tl.to(W1, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out", stagger: 0.1 }, 2.5);
+      tl.to(W1, { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.06 }, 4.45);
+      tl.to(["#fh-label", "#fh-t1", "#fh-t2", "#fh-cursor"], { opacity: 0, duration: 0.25, ease: "power2.in" }, 4.5);
+
+      // ---------- 3 · approve 4.8–7.8 ----------
+      tl.to(GRID, { opacity: 1, duration: 0.15 }, 4.7);
+      tl.to(["#fh-gv1", "#fh-gv2"], { scaleY: 1, duration: 0.3, ease: "power3.out" }, 4.7);
+      tl.to("#fh-gh", { scaleX: 1, duration: 0.3, ease: "power3.out" }, 4.75);
+      tl.set(TILES, { opacity: 1 }, 5.05);
+      tl.set(GRID, { opacity: 0 }, 5.05);
+      tl.set("#fh-panel", { opacity: 0 }, 5.05);
+      tl.to(TILES, { x: 0, y: 0, scale: 1, duration: 0.65, ease: "power3.inOut", stagger: 0.03 }, 5.05);
+      tl.to(".fh-key", { opacity: 1, scale: 1, duration: 0.35, ease: "expo.out", stagger: 0.14 }, 5.55);
+      tl.to(W2, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out", stagger: 0.1 }, 5.4);
+      tl.to("#fh-chip", { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, 6.75);
+      tl.to("#fh-check", { attr: { "stroke-dashoffset": 0 }, duration: 0.3, ease: "power2.out" }, 6.9);
+      tl.to(W2, { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.06 }, 7.5);
+      tl.to("#fh-chip", { opacity: 0, scale: 0.85, duration: 0.25, ease: "power2.in" }, 7.55);
+
+      // ---------- 4 · render 7.8–11.0 ----------
+      TILES.forEach((t, i) => {
+        const c = i % 3, r = Math.floor(i / 3);
+        tl.to(t, { x: 480 + 161 * i - finalL[c], y: 370 - finalT[r], scale: 152 / 290, duration: 0.7, ease: "power3.inOut" }, 7.8 + i * 0.03);
+      });
+      tl.to("#fh-track", { opacity: 1, scaleX: 1, duration: 0.6, ease: "expo.out" }, 8.0);
+      tl.to(".fh-tick", { opacity: 1, duration: 0.2, stagger: 0.04 }, 8.35);
+      tl.to(["#fh-bar", "#fh-file", "#fh-pct"], { opacity: 1, duration: 0.3 }, 8.4);
+      tl.to(W3, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power2.out", stagger: 0.1 }, 8.3);
+      tl.to("#fh-playhead", { opacity: 1, duration: 0.15 }, 8.55);
+      tl.to("#fh-playhead", { x: 960, duration: 1.7, ease: "none" }, 8.6);
+      tl.set("#fh-fill", { opacity: 1 }, 8.6);
+      tl.to("#fh-fill", { scaleX: 1, duration: 1.7, ease: "power1.inOut" }, 8.6);
+      const pct = { v: 0 };
+      tl.to(pct, { v: 100, duration: 1.7, ease: "power1.inOut",
+        onUpdate: () => { document.querySelector("#fh-pct").textContent = Math.round(pct.v) + "%"; } }, 8.6);
+      tl.to("#fh-pct", { color: "#9BE15D", duration: 0.2 }, 10.3);
+      tl.to(W3, { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", stagger: 0.06 }, 10.45);
+      // fold back into one panel
+      tl.to([...TILES, "#fh-track", ".fh-tick", "#fh-playhead", "#fh-bar", "#fh-fill", "#fh-file", "#fh-pct"],
+        { opacity: 0, duration: 0.3, ease: "power2.in" }, 10.55);
+      tl.to("#fh-panel", { opacity: 1, scale: 1, duration: 0.5, ease: "expo.out" }, 10.6);
+      tl.to("#fh-play", { opacity: 1, scale: 1, duration: 0.45, ease: "expo.out" }, 10.75);
+
+      // ---------- 5 · breath 11.0–11.8 (still) ----------
+
+      // ---------- 6 · end card 11.8–15 ----------
+      tl.to("#fh-play", { opacity: 0, scale: 0.6, duration: 0.2, ease: "power2.in" }, 11.75);
+      tl.set("#fh-panel", { transformOrigin: "0 0" }, 11.8);
+      tl.to("#fh-panel", { x: MARK.x - 480, y: MARK.y - 270, scale: MARK.s, duration: 0.6, ease: "power3.inOut" }, 11.8);
+      tl.to("#fh-mark", { opacity: 1, duration: 0.2 }, 12.3);
+      tl.to("#fh-panel", { opacity: 0, duration: 0.15 }, 12.35);
+      tl.to(WM, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.3, ease: "power2.out", stagger: 0.04 }, 12.25);
+      tl.to("#fh-tag", { opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, 12.6);
+
+      window.__timelines["fh"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,38 @@
+{
+  "$comment": "Copy this folder to library/brands/<your-brand>/ and edit. Paths are relative to this folder.",
+  "name": "Example Co.",
+  "tagline": "Make something worth watching.",
+  "url": "example.com",
+  "colors": {
+    "ground": "#0B0D12",
+    "ink": "#F5F7FA",
+    "primary": "#4F7CFF",
+    "accent": "#FFB547",
+    "muted": "#8A93A6"
+  },
+  "fonts": {
+    "display": { "family": "Inter", "weight": 800, "source": "google" },
+    "body": { "family": "Inter", "weight": 400, "source": "google" }
+  },
+  "logo": {
+    "primary": "logo/logo.svg",
+    "mark": "logo/mark.svg",
+    "onDark": "logo/logo-white.svg",
+    "minHeightPx": 48,
+    "clearSpace": "0.5x mark height"
+  },
+  "voice": {
+    "tone": ["confident", "clear", "warm"],
+    "avoid": ["jargon", "exclamation marks"]
+  },
+  "motion": {
+    "feel": "crisp, decisive, no bounce",
+    "defaultEase": "power3.out",
+    "cutRhythm": "on the beat"
+  },
+  "endCard": {
+    "lines": ["{{tagline}}", "{{url}}"],
+    "holdSeconds": 2.5
+  },
+  "legal": []
+}

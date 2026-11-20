@@ -1,0 +1,22 @@
+{
+  "name": "framehouse",
+  "private": true,
+  "type": "module",
+  "description": "Trailers, teasers and promos from a brief + assets, rendered with HyperFrames.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xReaPerD/Framehouse.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "studio": "node .claude/skills/video-studio/scripts/studio.mjs",
+    "new": "node .claude/skills/video-studio/scripts/studio.mjs new",
+    "list": "node .claude/skills/video-studio/scripts/studio.mjs list",
+    "render": "node .claude/skills/video-studio/scripts/studio.mjs render",
+    "check": "node .claude/skills/video-studio/scripts/studio.mjs check",
+    "doctor": "node .claude/skills/video-studio/scripts/studio.mjs doctor"
+  }
+}

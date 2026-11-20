@@ -1,0 +1,7 @@
+{
+  "$comment": "video-studio workspace config. See .claude/skills/video-studio/SKILL.md",
+  "hyperframesVersion": "0.9.41",
+  "projectsDir": "projects",
+  "libraryDir": "library",
+  "defaults": { "fps": 30, "quality": "looks" }
+}

@@ -1,0 +1,322 @@
+<title>Framehouse Teaser Storyboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+  /* Layout: a contact sheet on the film's own canvas (deep grape + fruit glow) — kit strip, to-scale timeline, numbered frames with notes. Single dark look on purpose. */
+  :root {
+    --ground: #160E2E;
+    --sheet: rgba(255, 255, 255, .06);
+    --line: rgba(255, 255, 255, .16);
+    --ink: #FFFFFF;
+    --muted: #CFC8E6;
+    --mango: #FFB224;
+    --berry: #FF4D7D;
+    --lime: #9BE15D;
+    --blue: #5B7CFF;
+    --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(600px 400px at 8% 0%, rgba(255, 178, 36, .16), transparent 70%),
+      radial-gradient(700px 500px at 100% 10%, rgba(255, 77, 125, .14), transparent 70%),
+      var(--ground);
+    color: var(--ink);
+    font: 300 16px/1.55 var(--font-display);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 40px 64px;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 40px; }
+  header { display: grid; gap: 10px; }
+  .eyebrow { font: 400 12px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  h1 { margin: 0; font-weight: 600; font-size: clamp(30px, 4.6vw, 52px); letter-spacing: -0.03em; line-height: 1.08; text-wrap: balance; }
+  h1 .m { color: var(--mango); } h1 .l { color: var(--lime); } h1 .b { color: var(--berry); }
+  .specs { display: flex; flex-wrap: wrap; gap: 8px 24px; font: 400 13px/1.4 var(--font-mono); color: var(--muted); }
+  .specs b { color: var(--ink); font-weight: 400; }
+
+  .kit { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .panel { background: var(--sheet); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 14px; align-content: start; min-width: 0; backdrop-filter: blur(12px); }
+  .panel h2 { margin: 0; font: 400 12px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .swatches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .sw { display: grid; gap: 6px; font: 400 11px/1.3 var(--font-mono); color: var(--muted); }
+  .sw i { display: block; height: 44px; border-radius: 10px; border: 1px solid var(--line); }
+  .type-sample { display: grid; gap: 6px; }
+  .type-sample .big { font-weight: 600; font-size: 38px; letter-spacing: -0.03em; line-height: 1; }
+  .type-sample .big span { color: var(--mango); }
+  .type-sample .mono { font: 400 14px/1.4 var(--font-mono); color: var(--muted); }
+  .panel p { margin: 0; color: var(--muted); font-size: 14px; }
+  .panel p b { color: var(--ink); font-weight: 400; }
+
+  .timeline { display: grid; gap: 8px; }
+  .bar { display: flex; height: 44px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .bar div { display: grid; place-items: center; font: 400 12px/1 var(--font-mono); color: var(--muted); border-right: 1px solid var(--line); background: var(--sheet); min-width: 0; }
+  .bar div:nth-child(2) { color: var(--mango); } .bar div:nth-child(3) { color: var(--lime); } .bar div:nth-child(4) { color: var(--berry); }
+  .bar div:last-child { border-right: 0; color: var(--ink); background: rgba(255,255,255,.12); }
+  .ticks { display: flex; justify-content: space-between; font: 400 11px/1 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .frames { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 560px), 1fr)); gap: 32px 24px; }
+  .beat { display: grid; gap: 14px; align-content: start; min-width: 0; }
+  .frame { aspect-ratio: 16 / 9; width: 100%; max-width: 100%; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--ground); position: relative; }
+  .frame svg { display: block; width: 100%; height: 100%; }
+  .frame .num { position: absolute; left: 10px; top: 10px; font: 400 11px/1 var(--font-mono); color: var(--ink); background: rgba(22,14,46,.6); padding: 5px 7px; border-radius: 6px; }
+  .head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .head h3 { margin: 0; font-weight: 400; font-size: 20px; letter-spacing: -0.01em; }
+  .head .t { font: 400 12px/1 var(--font-mono); color: var(--mango); font-variant-numeric: tabular-nums; }
+  .meta { display: grid; grid-template-columns: 92px 1fr; gap: 6px 14px; margin: 0; font-size: 14px; }
+  .meta dt { font: 400 11px/1.9 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .meta dd { margin: 0; min-width: 0; }
+  .meta .super { font-weight: 400; }
+  .meta .super .m { color: var(--mango); } .meta .super .l { color: var(--lime); } .meta .super .b { color: var(--berry); }
+
+  .ask { border: 1px solid rgba(255,178,36,.4); background: rgba(255,178,36,.08); border-radius: 16px; padding: 24px; display: grid; gap: 12px; }
+  .ask h2 { margin: 0; font-weight: 400; font-size: 22px; }
+  .ask ol { margin: 0; padding-left: 20px; display: grid; gap: 8px; color: var(--muted); }
+  .ask ol b { color: var(--ink); font-weight: 400; }
+
+  body.solo { padding: 0; }
+  body.solo .wrap > :not(.frames) { display: none; }
+  body.solo .frames { display: block; }
+  body.solo .beat { display: none; }
+  body.solo .beat.on { display: block; }
+  body.solo .beat.on > :not(.frame) { display: none; }
+  body.solo .frame { border: 0; border-radius: 0; width: 100vw; height: 100vh; aspect-ratio: auto; }
+  body.solo .num { display: none; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="70"/></filter>
+    <filter id="frost" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="120"/></filter>
+    <filter id="tiny" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="12"/></filter>
+    <!-- the four fruit blobs, one layout for the whole film -->
+    <g id="blobs">
+      <circle cx="560" cy="300" r="260" fill="#FFB224"/>
+      <circle cx="1400" cy="270" r="240" fill="#FF4D7D"/>
+      <circle cx="600" cy="860" r="230" fill="#9BE15D"/>
+      <circle cx="1380" cy="830" r="280" fill="#5B7CFF"/>
+    </g>
+    <clipPath id="c-panel"><rect x="480" y="270" width="960" height="540" rx="28"/></clipPath>
+    <clipPath id="c-tiles">
+      <rect x="480" y="250" width="290" height="164" rx="18"/><rect x="815" y="250" width="290" height="164" rx="18"/><rect x="1150" y="250" width="290" height="164" rx="18"/>
+      <rect x="480" y="444" width="290" height="164" rx="18"/><rect x="815" y="444" width="290" height="164" rx="18"/><rect x="1150" y="444" width="290" height="164" rx="18"/>
+    </clipPath>
+    <clipPath id="c-track"><rect x="440" y="300" width="1040" height="220" rx="26"/><rect x="480" y="572" width="960" height="22" rx="11"/></clipPath>
+    <clipPath id="c-mark"><rect x="500" y="472" width="160" height="90" rx="18"/></clipPath>
+    <!-- background: blobs softened on grape -->
+    <g id="bg"><rect width="1920" height="1080" fill="#160E2E"/><use href="#blobs" filter="url(#soft)" opacity=".85"/></g>
+    <!-- mini key frames for the storyboard tiles (local 290×164) -->
+    <g id="k1"><circle cx="145" cy="82" r="22" fill="#FFB224" filter="url(#tiny)"/><circle cx="145" cy="82" r="8" fill="#FFF"/></g>
+    <g id="k2"><rect x="75" y="62" width="140" height="14" rx="7" fill="#FFF"/><rect x="100" y="92" width="90" height="10" rx="5" fill="#FF4D7D"/></g>
+    <g id="k3"><path d="M50 164 C80 96 130 56 196 50" stroke="#FFF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="200" cy="50" r="9" fill="#9BE15D"/></g>
+    <g id="k4"><text x="145" y="100" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="48" fill="#FFF">Aa</text></g>
+    <g id="k5"><rect x="58" y="60" width="64" height="64" rx="16" fill="#5B7CFF"/><rect x="134" y="60" width="98" height="64" rx="16" fill="#FFF" fill-opacity=".85"/></g>
+    <g id="k6"><rect x="88" y="64" width="44" height="26" rx="7" fill="#FFF" fill-opacity=".9"/><rect x="142" y="70" width="64" height="14" rx="7" fill="#FFF"/></g>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Framehouse Teaser · cut: teaser · storyboard v2 · awaiting approval</div>
+    <h1>One glass frame becomes the whole workflow: <span class="m">describe</span>, <span class="l">approve</span>, <span class="b">render</span>.</h1>
+    <div class="specs"><span><b>15.0 s</b> runtime</span><span><b>1920×1080</b> · 30 fps</span><span><b>6</b> beats · 0 hard cuts</span><span>hero object: <b>the glass 16:9 panel</b></span></div>
+  </header>
+
+  <section class="kit" aria-label="Proposed brand kit">
+    <div class="panel">
+      <h2>Palette (proposed)</h2>
+      <div class="swatches">
+        <div class="sw"><i style="background:#160E2E"></i>grape<br>#160E2E</div>
+        <div class="sw"><i style="background:#FFB224"></i>mango<br>#FFB224</div>
+        <div class="sw"><i style="background:#FF4D7D"></i>strawberry<br>#FF4D7D</div>
+        <div class="sw"><i style="background:#9BE15D"></i>lime<br>#9BE15D</div>
+        <div class="sw"><i style="background:#5B7CFF"></i>blueberry<br>#5B7CFF</div>
+        <div class="sw"><i style="background:rgba(255,255,255,.14);backdrop-filter:blur(8px)"></i>glass<br>white 12% + 28px blur</div>
+      </div>
+      <p>The four fruits sit behind the glass as soft blobs. Each step's keyword takes one fruit: Describe is mango, Approve is lime, Render is strawberry.</p>
+    </div>
+    <div class="panel">
+      <h2>Type (proposed)</h2>
+      <div class="type-sample">
+        <div class="big"><span>Describe</span> it.</div>
+        <div class="mono">A 15-second launch teaser.</div>
+      </div>
+      <p>Poppins 600 for the lines and the wordmark, round and friendly. JetBrains Mono for anything the product "types": the prompt, file names, percentages.</p>
+    </div>
+    <div class="panel">
+      <h2>Motion &amp; sound</h2>
+      <p><b>Motion:</b> soft and buoyant. The blobs drift slowly the whole time, glass panels slide and morph, and type lands crisp and then holds still.</p>
+      <p><b>Sound:</b> an original bright pad plus one soft whoosh, synthesized with FFmpeg (royalty-free), since you're not signed in to the HeyGen music catalog. The film also works silent, as the README GIF needs to.</p>
+    </div>
+  </section>
+
+  <section class="timeline" aria-label="Timeline">
+    <div class="bar">
+      <div style="flex:2">1</div><div style="flex:2.8">2</div><div style="flex:3">3</div><div style="flex:3.2">4</div><div style="flex:.8">5</div><div style="flex:3.2">6 · end card</div>
+    </div>
+    <div class="ticks"><span>0s</span><span>3</span><span>6</span><span>9</span><span>12</span><span>15s</span></div>
+  </section>
+
+  <section class="frames">
+    <article class="beat" id="b1">
+      <div class="frame"><span class="num">01</span>
+        <svg viewBox="0 0 1920 1080" role="img" aria-label="Fruit-coloured blobs blooming on grape, with a frosted glass panel forming over them">
+          <rect width="1920" height="1080" fill="#160E2E"/>
+          <use href="#blobs" filter="url(#soft)" opacity=".6"/>
+          <g clip-path="url(#c-panel)" opacity=".7"><use href="#blobs" filter="url(#frost)"/><rect width="1920" height="1080" fill="#FFF" fill-opacity=".1"/></g>
+          <rect x="480" y="270" width="960" height="540" rx="28" fill="none" stroke="#FFF" stroke-opacity=".3" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="head"><h3>Glass forms</h3><span class="t">0.0 – 2.0 s</span></div>
+      <dl class="meta">
+        <dt>Motion</dt><dd>Dark grape for 0.3 s. Four fruit blobs bloom in one after another (mango, strawberry, lime, blueberry). A frosted 16:9 glass panel then fades up over them as it sharpens from blurry to crisp, and its border catches the light.</dd>
+        <dt>Into next</dt><dd>A white text cursor appears inside the panel.</dd>
+        <dt>Sound</dt><dd>Pad fades in.</dd>
+      </dl>
+    </article>
+
+    <article class="beat" id="b2">
+      <div class="frame"><span class="num">02</span>
+        <svg viewBox="0 0 1920 1080" role="img" aria-label="A prompt typed inside the glass panel, with Describe it below">
+          <use href="#bg"/>
+          <g clip-path="url(#c-panel)"><use href="#blobs" filter="url(#frost)"/><rect width="1920" height="1080" fill="#160E2E" fill-opacity=".3"/><rect width="1920" height="1080" fill="#FFF" fill-opacity=".1"/></g>
+          <rect x="480" y="270" width="960" height="540" rx="28" fill="none" stroke="#FFF" stroke-opacity=".45" stroke-width="2"/>
+          <text x="560" y="372" font-family="JetBrains Mono, monospace" font-size="22" fill="#FFF" fill-opacity=".7" letter-spacing="3">PROMPT</text>
+          <text x="560" y="470" font-family="JetBrains Mono, monospace" font-size="40" fill="#FFF">A 15-second launch teaser.</text>
+          <text x="560" y="534" font-family="JetBrains Mono, monospace" font-size="40" fill="#FFF">Bright, fruity, glassy.</text>
+          <rect x="1094" y="500" width="4" height="44" fill="#FFF"/>
+          <text x="960" y="950" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="88" letter-spacing="-2" fill="#FFF"><tspan fill="#FFB224">Describe</tspan> it.</text>
+        </svg>
+      </div>
+      <div class="head"><h3>Describe</h3><span class="t">2.0 – 4.8 s</span></div>
+      <dl class="meta">
+        <dt>Super</dt><dd class="super"><span class="m">Describe</span> it.</dd>
+        <dt>Motion</dt><dd>The prompt types in, about 0.03 s per character, then the cursor holds. "Describe it." blurs in word by word below the panel.</dd>
+        <dt>Into next</dt><dd>The text fades out and the panel splits along a 3×2 grid.</dd>
+        <dt>Sound</dt><dd>The pad lifts.</dd>
+      </dl>
+    </article>
+
+    <article class="beat" id="b3">
+      <div class="frame"><span class="num">03</span>
+        <svg viewBox="0 0 1920 1080" role="img" aria-label="Six glass storyboard tiles with an Approved chip, and Approve it below">
+          <use href="#bg"/>
+          <g clip-path="url(#c-tiles)"><use href="#blobs" filter="url(#frost)"/><rect width="1920" height="1080" fill="#160E2E" fill-opacity=".25"/><rect width="1920" height="1080" fill="#FFF" fill-opacity=".12"/></g>
+          <g fill="none" stroke="#FFF" stroke-opacity=".45" stroke-width="2">
+            <rect x="480" y="250" width="290" height="164" rx="18"/><rect x="815" y="250" width="290" height="164" rx="18"/><rect x="1150" y="250" width="290" height="164" rx="18"/>
+            <rect x="480" y="444" width="290" height="164" rx="18"/><rect x="815" y="444" width="290" height="164" rx="18"/><rect x="1150" y="444" width="290" height="164" rx="18"/>
+          </g>
+          <use href="#k1" x="480" y="250"/><use href="#k2" x="815" y="250"/><use href="#k3" x="1150" y="250"/>
+          <use href="#k4" x="480" y="444"/><use href="#k5" x="815" y="444"/><use href="#k6" x="1150" y="444"/>
+          <rect x="1226" y="636" width="214" height="58" rx="29" fill="#9BE15D"/>
+          <path d="M1254 665 l12 12 l22 -24" stroke="#160E2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="1300" y="675" font-family="JetBrains Mono, monospace" font-size="24" fill="#160E2E">Approved</text>
+          <text x="960" y="880" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="88" letter-spacing="-2" fill="#FFF"><tspan fill="#9BE15D">Approve</tspan> it.</text>
+        </svg>
+      </div>
+      <div class="head"><h3>Approve</h3><span class="t">4.8 – 7.8 s</span></div>
+      <dl class="meta">
+        <dt>Super</dt><dd class="super"><span class="l">Approve</span> it.</dd>
+        <dt>Motion</dt><dd>The six cells pull apart into separate glass tiles, each with a gap between them. Each tile draws its own small key frame a beat after the last. Then a lime "Approved" chip pops on and its check draws in.</dd>
+        <dt>Into next</dt><dd>The tiles shrink and slide down into a single row.</dd>
+        <dt>Sound</dt><dd>The pad lifts.</dd>
+      </dl>
+    </article>
+
+    <article class="beat" id="b4">
+      <div class="frame"><span class="num">04</span>
+        <svg viewBox="0 0 1920 1080" role="img" aria-label="Glass timeline with six tiles, a playhead and a strawberry render bar at 72 percent, and Render it below">
+          <use href="#bg"/>
+          <g clip-path="url(#c-track)"><use href="#blobs" filter="url(#frost)"/><rect width="1920" height="1080" fill="#160E2E" fill-opacity=".3"/><rect width="1920" height="1080" fill="#FFF" fill-opacity=".1"/></g>
+          <rect x="440" y="300" width="1040" height="220" rx="26" fill="none" stroke="#FFF" stroke-opacity=".45" stroke-width="2"/>
+          <g stroke="#FFF" stroke-opacity=".5" stroke-width="2">
+            <line x1="480" y1="336" x2="480" y2="348"/><line x1="640" y1="336" x2="640" y2="348"/><line x1="800" y1="336" x2="800" y2="348"/><line x1="960" y1="336" x2="960" y2="348"/><line x1="1120" y1="336" x2="1120" y2="348"/><line x1="1280" y1="336" x2="1280" y2="348"/><line x1="1440" y1="336" x2="1440" y2="348"/>
+          </g>
+          <g transform="translate(480 370)">
+            <g fill="#FFF" fill-opacity=".16" stroke="#FFF" stroke-opacity=".5" stroke-width="2">
+              <rect x="0" width="152" height="86" rx="12"/><rect x="161" width="152" height="86" rx="12"/><rect x="322" width="152" height="86" rx="12"/><rect x="483" width="152" height="86" rx="12"/><rect x="644" width="152" height="86" rx="12"/><rect x="805" width="152" height="86" rx="12"/>
+            </g>
+            <g transform="scale(.524)"><use href="#k1" x="0"/><use href="#k2" x="307"/><use href="#k3" x="614"/><use href="#k4" x="922"/><use href="#k5" x="1229"/><use href="#k6" x="1536"/></g>
+          </g>
+          <line x1="1170" y1="326" x2="1170" y2="494" stroke="#FFF" stroke-width="3"/>
+          <circle cx="1170" cy="326" r="8" fill="#FFF"/>
+          <rect x="480" y="572" width="691" height="22" rx="11" fill="#FF4D7D"/>
+          <rect x="480" y="572" width="960" height="22" rx="11" fill="none" stroke="#FFF" stroke-opacity=".45" stroke-width="2"/>
+          <text x="480" y="640" font-family="JetBrains Mono, monospace" font-size="26" fill="#FFF" fill-opacity=".8">rendering teaser_v001.mp4</text>
+          <text x="1440" y="640" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="26" fill="#FFF">72%</text>
+          <text x="960" y="870" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="600" font-size="88" letter-spacing="-2" fill="#FFF"><tspan fill="#FF4D7D">Render</tspan> it.</text>
+        </svg>
+      </div>
+      <div class="head"><h3>Render</h3><span class="t">7.8 – 11.0 s</span></div>
+      <dl class="meta">
+        <dt>Super</dt><dd class="super"><span class="b">Render</span> it.</dd>
+        <dt>Motion</dt><dd>The row settles into a long glass timeline bar. Ruler ticks draw in and a white playhead sweeps left to right. Below, the strawberry render bar fills as the percentage counts from 0 to 100%.</dd>
+        <dt>Into next</dt><dd>At 100% the timeline folds back into one panel, and the bar becomes a play button.</dd>
+        <dt>Sound</dt><dd>The pad lifts; a low pulse lands at 100%.</dd>
+      </dl>
+    </article>
+
+    <article class="beat" id="b5">
+      <div class="frame"><span class="num">05</span>
+        <svg viewBox="0 0 1920 1080" role="img" aria-label="The single glass panel glowing with fruit colours and a play button">
+          <use href="#bg"/>
+          <g clip-path="url(#c-panel)"><use href="#blobs" filter="url(#frost)"/><rect width="1920" height="1080" fill="#FFF" fill-opacity=".12"/></g>
+          <rect x="480" y="270" width="960" height="540" rx="28" fill="none" stroke="#FFF" stroke-opacity=".5" stroke-width="2"/>
+          <circle cx="960" cy="540" r="64" fill="#FFF" fill-opacity=".22" stroke="#FFF" stroke-width="3"/>
+          <path d="M942 508 L990 540 L942 572 Z" fill="#FFF"/>
+        </svg>
+      </div>
+      <div class="head"><h3>The film</h3><span class="t">11.0 – 11.8 s</span></div>
+      <dl class="meta">
+        <dt>Motion</dt><dd>Nearly still: one glass panel with the fruit colours glowing through it and a play button at its centre. This is the pause before the name.</dd>
+        <dt>Into next</dt><dd>On the whoosh the panel shrinks to logo size and slides left, and the wordmark writes out beside it.</dd>
+        <dt>Sound</dt><dd>Near-silence, then the whoosh.</dd>
+      </dl>
+    </article>
+
+    <article class="beat" id="b6">
+      <div class="frame"><span class="num">06</span>
+        <svg viewBox="0 0 1920 1080" role="img" aria-label="End card: glass tile logo mark, Framehouse wordmark and Your AI video studio">
+          <use href="#bg"/>
+          <g clip-path="url(#c-mark)">
+            <rect x="500" y="472" width="160" height="90" fill="#2A1F4A"/>
+            <g filter="url(#tiny)"><circle cx="520" cy="482" r="40" fill="#FFB224"/><circle cx="650" cy="478" r="38" fill="#FF4D7D"/><circle cx="522" cy="560" r="36" fill="#9BE15D"/><circle cx="648" cy="556" r="42" fill="#5B7CFF"/></g>
+            <rect x="500" y="472" width="160" height="90" fill="#FFF" fill-opacity=".14"/>
+          </g>
+          <rect x="500" y="472" width="160" height="90" rx="18" fill="none" stroke="#FFF" stroke-opacity=".7" stroke-width="3"/>
+          <text x="700" y="560" font-family="Poppins, sans-serif" font-weight="600" font-size="124" letter-spacing="-4" fill="#FFF">Framehouse</text>
+          <text x="960" y="676" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="300" font-size="40" fill="#CFC8E6">Your AI video studio</text>
+        </svg>
+      </div>
+      <div class="head"><h3>Framehouse</h3><span class="t">11.8 – 15.0 s · hold 2.6 s</span></div>
+      <dl class="meta">
+        <dt>Super</dt><dd class="super">Framehouse / Your AI video studio</dd>
+        <dt>Motion</dt><dd>The panel lands as the logo mark: a small rounded glass tile with the four fruits glowing inside it. "Framehouse" blurs in letter by letter beside it, and "Your AI video studio" fades in at 12.6 s. The background blobs slow to a stop, and the card holds from 12.4 s to the end.</dd>
+        <dt>Sound</dt><dd>The whoosh lands, then the pad tail fades out from 13.5 s to 15.0 s.</dd>
+      </dl>
+    </article>
+  </section>
+
+  <section class="ask">
+    <h2>Before I build, please confirm</h2>
+    <ol>
+      <li><b>The six beats</b>, or give notes by beat number.</li>
+      <li><b>The new look</b>: a deep grape background, mango, strawberry, lime and blueberry blobs, frosted-glass panels, and Poppins with JetBrains Mono.</li>
+      <li><b>The audio plan</b>: an original pad and whoosh synthesized with FFmpeg, or a silent film. Signing in to HeyGen (free) would let me use a catalog music track instead.</li>
+    </ol>
+  </section>
+</div>
+
+<script>
+  function solo() {
+    var m = /^#f([1-6])$/.exec(location.hash);
+    document.body.classList.toggle('solo', !!m);
+    document.querySelectorAll('.beat').forEach(function (b) { b.classList.toggle('on', !!m && b.id === 'b' + m[1]); });
+  }
+  window.addEventListener('hashchange', solo); solo();
+</script>

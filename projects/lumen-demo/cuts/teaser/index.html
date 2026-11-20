@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      /* Lumen brand kit (assets/shared/brand/brand.json) */
+      :root {
+        --ground: #0a0908;
+        --ink: #f3eee6;
+        --amber: #ffb347;
+        --muted: #6f675d;
+        --font-display: "Outfit", sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ground);
+      }
+      #ground { position: absolute; inset: 0; background: var(--ground); }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="15"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="ground"></div>
+      <div
+        id="lumen"
+        data-composition-id="lumen"
+        data-composition-src="compositions/lumen.html"
+        data-start="0"
+        data-duration="15"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <audio
+        id="pad"
+        class="clip"
+        src="assets/shared/audio/music/lumen-pad.wav"
+        data-start="0"
+        data-duration="15"
+        data-track-index="2"
+        data-volume="1"
+      ></audio>
+      <audio
+        id="whoosh"
+        class="clip"
+        src="assets/shared/audio/sfx/whoosh-soft.wav"
+        data-start="11.5"
+        data-duration="1.46"
+        data-track-index="3"
+        data-volume="1.8"
+      ></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

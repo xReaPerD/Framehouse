@@ -1,0 +1,30 @@
+{
+  "$comment": "This project's brand kit. Status 'draft' until filled from the client's material (logo, guidelines, website, references). See references/brand-kit.md.",
+  "status": "draft",
+  "sources": [],
+  "name": "",
+  "tagline": "",
+  "url": "",
+  "colors": {
+    "ground": "",
+    "ink": "",
+    "primary": "",
+    "accent": "",
+    "muted": ""
+  },
+  "fonts": {
+    "display": { "family": "", "weight": 700, "source": "" },
+    "body": { "family": "", "weight": 400, "source": "" }
+  },
+  "logo": {
+    "primary": "",
+    "mark": "",
+    "onDark": "",
+    "minHeightPx": 48,
+    "clearSpace": ""
+  },
+  "voice": { "tone": [], "avoid": [] },
+  "motion": { "feel": "", "defaultEase": "", "cutRhythm": "" },
+  "endCard": { "lines": [], "holdSeconds": 2.5 },
+  "legal": []
+}

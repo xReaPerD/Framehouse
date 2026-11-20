@@ -1,0 +1,21 @@
+{
+  "slug": "framehouse-teaser",
+  "title": "Framehouse Teaser",
+  "client": null,
+  "brand": "project",
+  "createdAt": "2026-11-20T16:44:49.224Z",
+  "hyperframesVersion": "0.9.41",
+  "status": "rendered",
+  "cuts": [
+    {
+      "id": "teaser",
+      "resolution": "landscape",
+      "width": 1920,
+      "height": 1080,
+      "duration": 15,
+      "fps": 30,
+      "dir": "cuts/teaser",
+      "createdAt": "2026-11-20T16:44:51.426Z"
+    }
+  ]
+}
