@@ -6,7 +6,7 @@
 ## Creative calls
 - Built to the approved board v2 (fruity glassmorphism): one canvas, no hard cuts; the glass 16:9 panel is the hero object and becomes the logo mark.
 - Glass is real `backdrop-filter` blur over gradient blobs that drift for the whole film.
-- Audio: original pad (C, Am, F, C chords changing on each beat) + the soft whoosh from the Lumen project, synthesized with FFmpeg (not signed in to the HeyGen catalog; requester approved).
+- Audio: original pad (C, Am, F, C chords changing on each beat) + a soft pink-noise whoosh, both synthesized with FFmpeg (not signed in to the HeyGen catalog; requester approved).
 
 ## Measured
 - `hyperframes check`: 0 errors. 1 warning kept: `first_frame_empty`. Frame 0 shows the four fruit blobs at low strength (the hook blooms them), which the detector counts as background.
