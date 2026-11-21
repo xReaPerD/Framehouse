@@ -30,8 +30,8 @@ How to translate skill wording for Gemini:
   `.claude/skills/X/SKILL.md` for `video-studio`), then read any `references/*.md` it tells you to.
 - "Share it as a page" → save an HTML file in the project and give the user its path (or open it
   in the browser).
-- If a HyperFrames skill is missing, tell the user to run `npx hyperframes skills update` and
-  restart the session — do not install skills yourself.
+- If a HyperFrames skill is missing, run `npx hyperframes skills update` yourself, then tell the
+  user to restart the session so the new skills load.
 
 ## Rules
 
@@ -43,5 +43,5 @@ How to translate skill wording for Gemini:
 - Get approval on the visual storyboard before building, and look at snapshot stills before
   rendering — exactly as `video-studio/SKILL.md` describes.
 - Never invent product claims, dates, prices, names or quotes.
-- Install missing system tools (ffmpeg, npm libs) yourself rather than handing it back to the
-  user — except HyperFrames skills (see above).
+- Install missing tools (ffmpeg, npm libs, HyperFrames skills) yourself rather than handing it
+  back to the user.

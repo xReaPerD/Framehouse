@@ -40,8 +40,8 @@ No workspace yet? Run `$STUDIO init [dir]` first.
 
 1. **Load the `hyperframes` skill before writing or editing any composition.** It holds the
    render contract (`window.__timelines`, `data-*` timing attributes, seek-safe animation rules).
-   If it is not installed, stop and tell the user to run `npx hyperframes skills update` and
-   restart the session — do not install skills yourself. Also use `hyperframes-registry` (ready-made
+   If it is not installed, run `npx hyperframes skills update` yourself, then tell the user to
+   restart the session so the new skills load. Also use `hyperframes-registry` (ready-made
    blocks) and `media-use` (music, SFX, voice, image treatments) when relevant.
 2. `$STUDIO doctor` must pass (Node ≥ 22, Chrome, **FFmpeg**) before the first render.
 
